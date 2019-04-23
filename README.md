@@ -1,4 +1,4 @@
-##Dumppi-tapahtumat-scraper
+# Dumppi-tapahtumat-scraper
 
 Gets event data in JSON-format from dumppi.fi/tapahtumat
 
