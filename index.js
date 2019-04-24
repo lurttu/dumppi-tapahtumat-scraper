@@ -18,23 +18,25 @@ app.get('/tapahtumat', async (req, res) => {
                 const events = $('#em-wrapper > div.css-events-list > table > tbody',html).children();
 
                 events.each(function(i, elem) {                                     //kaivellaan tapahtumien osaset irti ja kasataan JSON-objekti
+                    let linkki = $('a', this).attr('href');
                     let event = {
                         kapasiteetti : $('b', this).text().replace(/\s\s+/g, ' '),
                         ajankohta: $('td', this).first().text().replace(/\s\s+/g, ' '),
                         nimi: $('a', this).text().replace(/\s\s+/g, ' '),
-                        sijainti: $('i', this).text().replace(/\s\s+/g, ' ')
+                        sijainti: $('i', this).text().replace(/\s\s+/g, ' '),
+                        linkki: linkki
                     };
                 EventObjects.push(event);
-            });
-        }
-        res.json({
-            Tapahtumat: EventObjects
-        });
-        } catch (error) {
-            console.log(error);
+                });
+            }
             res.json({
-                Err: error.name,
+                Tapahtumat: EventObjects
             });
+            } catch (error) {
+                console.log(error);
+                res.json({
+                    Err: error.name,
+                });
         }
 });
 if(DEBUG) {
